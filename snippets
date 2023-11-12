@@ -1,0 +1,36 @@
+	//void set_x(int x){
+	//int a = x;
+	//}
+
+	//int update_x(int x){
+	//int a = a + x;
+	//return a;
+	//}
+
+	//int get_x(int x){
+	//return x;
+	//}
+
+	//String get_s(String s){
+	//return s;
+	//}
+
+	//void set_s(String s){
+	//String a = s;
+	//}
+
+        String tab_name = null;
+        int screen_number = 0;
+
+        while (!"Title".equals(tab_name)) {
+            tab_name = tabbedPane.getTitleAt(screen_number);
+            screen_number++;
+        }
+
+        if ("Title".equals(tab_name)) {
+            int this_tab = tabbedPane.getSelectedIndex();
+            title_screen.loadgame = false;
+            tabbedPane.setSelectedIndex(screen_number);
+            Game_Screen.tab--;
+            tabbedPane.removeTabAt(this_tab);
+        }

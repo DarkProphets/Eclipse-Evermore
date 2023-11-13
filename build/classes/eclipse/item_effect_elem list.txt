@@ -1,0 +1,19 @@
+switch (element){
+case "fire":
+break;
+
+case "ice":
+break;
+
+case "thunder":
+break;
+
+case "earth":
+break;
+
+case "wind":
+break;
+
+case "water":
+break;
+}

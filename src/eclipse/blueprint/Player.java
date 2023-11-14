@@ -2,22 +2,22 @@
 //Kealdor created Player.java on 10-28-2023 at 8:19:44 PM
 package eclipse.blueprint;
 
+import eclipse.core;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import eclipse.core;
 
-public class Player extends Creature {
+public class Player extends Creature{
 
     public items item = new items();
     public feats feat = new feats();
     public Player_Spells p_spell = new Player_Spells();
 
     /**
-     * what type of creature the player is. example human or elf.
+     what type of creature the player is. example human or elf.
      */
     public int race;
 
@@ -47,15 +47,15 @@ public class Player extends Creature {
     public int mage_lvl_up_mp;
 
     /**
-     * used for quest system and to speed level up using alternative ways
-     * instead of grinding for xp fight after fight
+     used for quest system and to speed level up using alternative ways instead
+     of grinding for xp fight after fight
      */
     public int encounters_completed;//used for questing and giving rewards
     public int arena_kills;//used for giving rewards from killing in arena
     public int alpha_kills;//used for giving rewards from killing in alpha arena
 
     /**
-     * logs the last screen the player was on
+     logs the last screen the player was on
      */
     public int last_location;
 
@@ -148,7 +148,7 @@ public class Player extends Creature {
 
     //limit breaks
     //public int lb_double;//doubles every stat in combat for 2 turns
-    public Player() throws IOException {
+    public Player() throws IOException{
         core.log("Dice roll - level up hit points",
                 "about to roll for Mage Level Up MP");
 
@@ -166,30 +166,30 @@ public class Player extends Creature {
 
     }
 
-    public int get_str() {
+    public int get_str(){
         return str;
     }
 
-    public int get_con() {
+    public int get_con(){
         return con;
     }
 
-    public int get_iq() {
+    public int get_iq(){
         return iq;
     }
 
-    public int get_magic_atk_dmg() {
+    public int get_magic_atk_dmg(){
         return magic_atk_dmg;
     }
 
-    public void set_magic_atk_dmg() throws IOException {
-        if (core.pre_alpha_fight == 1) {
+    public void set_magic_atk_dmg() throws IOException{
+        if (core.pre_alpha_fight == 1){
             magic_atk_dmg = get_magic_atk_dmg() + bmage_lvl + wiz_lvl + (get_iq() / 2) + (get_dmg() / 3);
-        } else {
-            if (pal_lvl > wiz_lvl) {
+        } else{
+            if (pal_lvl > wiz_lvl){
                 magic_atk_dmg = get_dmg() + pal_lvl + get_wis();
             }
-            if (dk_lvl > wiz_lvl) {
+            if (dk_lvl > wiz_lvl){
                 magic_atk_dmg = get_dmg() + dk_lvl + get_iq();
             }
         }
@@ -198,32 +198,32 @@ public class Player extends Creature {
                 + "Attack combat damage of " + get_magic_atk_dmg());
     }
 
-    public void set_str(int x) throws IOException {
+    public void set_str(int x) throws IOException{
         str = get_str() + x;
 
         core.log("stat modification", name + " has a "
                 + "Strength of " + get_str());
     }
 
-    public void set_con(int x) throws IOException {
+    public void set_con(int x) throws IOException{
         con = get_con() + x;
 
         core.log("stat modification", name + " has a "
                 + "Constuition of " + get_con());
     }
 
-    public int get_wis() {
+    public int get_wis(){
         return wis;
     }
 
-    public void set_wis(int x) throws IOException {
+    public void set_wis(int x) throws IOException{
         wis = get_wis() + x;
 
         core.log("stat modification", name + " has a "
                 + "Wisdom of " + get_wis());
     }
 
-    public void set_iq(int x) throws IOException {
+    public void set_iq(int x) throws IOException{
         iq = get_iq() + x;
 
         core.log("stat modification", name + " has a "
@@ -231,11 +231,11 @@ public class Player extends Creature {
     }
 
     /**
-     * used to tally all the characters levels together into one number used for
-     * scaling enemies to the same level as the character
+     used to tally all the characters levels together into one number used for
+     scaling enemies to the same level as the character
      */
-    public void set_lvl(Player player) throws IOException {
-        switch (player.lvl_up_class_choice) {
+    public void set_lvl(Player player) throws IOException{
+        switch (player.lvl_up_class_choice){
             case 1://fighter    
                 player.ftr_lvl++;
                 break;
@@ -275,15 +275,15 @@ public class Player extends Creature {
                 + System.lineSeparator()
                 + name + " has " + pal_lvl + " levels of Paladin");
 
-        if (level > 0) {
+        if (level > 0){
             new_character = false;
         }
     }
 
     /**
-     * math to figure out armor class
+     math to figure out armor class
      */
-    public void set_dmg_reduction() throws IOException {
+    public void set_dmg_reduction() throws IOException{
         con_mod = set_modifiers("con", get_con());
         item.equip_armor();
         item.equip_shield();
@@ -300,10 +300,10 @@ public class Player extends Creature {
     }
 
     /**
-     * sets up equipment profrencies and setup damage and armor class called
-     * from load character and level up
+     sets up equipment profrencies and setup damage and armor class called from
+     load character and level up
      */
-    public void wpn_armor_setup(Player character) throws IOException {
+    public void wpn_armor_setup(Player character) throws IOException{
         feat.set_wpn_profs(character);
         feat.set_shield_profs(character);
         feat.set_armor_profs(character);
@@ -313,15 +313,15 @@ public class Player extends Creature {
     }
 
     /**
-     * refills health and mana. adjusts total level for accurate enemy scaling.
-     * checks if any profrencies need to be given based. then sends player back
-     * to the last location they were at before combat. the gui will be let the
-     * players make a choice as to what class they want to be. that gui screen
-     * will end up calling this function on click of the choice button after
-     * registering the selected class.
+     refills health and mana. adjusts total level for accurate enemy scaling.
+     checks if any profrencies need to be given based. then sends player back to
+     the last location they were at before combat. the gui will be let the
+     players make a choice as to what class they want to be. that gui screen
+     will end up calling this function on click of the choice button after
+     registering the selected class.
      */
-    public void level_up(Player character) throws IOException {
-        if (character.new_character == false) {
+    public void level_up(Player character) throws IOException{
+        if (character.new_character == false){
             core.log("Dice roll - level up hit points",
                     "about to roll for Mage Level Up MP");
             mage_lvl_up_mp = core.Dice_Parser("1d10");
@@ -345,9 +345,9 @@ public class Player extends Creature {
     }
 
     /**
-     * math to figure out damage and also applies dual wield and crit feats
+     math to figure out damage and also applies dual wield and crit feats
      */
-    public void set_dmg() throws IOException {
+    public void set_dmg() throws IOException{
         str_mod = set_modifiers("strength", get_str());
         item.equip_weapon();
 
@@ -365,12 +365,12 @@ public class Player extends Creature {
                 + get_arena_dmg() + " during Arena Encounters");
     }
 
-    public int get_arena_dmg() {
+    public int get_arena_dmg(){
         return arena_dmg;
     }
 
-    public void feat_dmg_set(int dmg_type, int x) {
-        switch (dmg_type) {
+    public void feat_dmg_set(int dmg_type, int x){
+        switch (dmg_type){
             case 1:
                 dmg = x;
                 break;
@@ -381,14 +381,16 @@ public class Player extends Creature {
     }
 
     /**
-     * Saves character data first, then feats, then inventory, and finally
-     * returns to last spot saved
-     *
-     * @param player
-     * @throws java.io.IOException
+     Saves character data first, then feats, then inventory, and finally returns
+     to last spot saved
+
+     @param player
+
+     @throws java.io.IOException
      */
-    public void Save_Character(Player player) throws IOException {
-        try (FileWriter FileWriter = new FileWriter(player.name + core.player_data); PrintWriter PrintWriter = new PrintWriter(FileWriter);) {
+    public void Save_Character(Player player) throws IOException{
+        core.Folder_Creation(player.name, "save");
+        try (FileWriter FileWriter = new FileWriter(core.save_root + player.name + core.player_data);  PrintWriter PrintWriter = new PrintWriter(FileWriter);){
 
             PrintWriter.println(name);
             PrintWriter.println(race);
@@ -428,114 +430,114 @@ public class Player extends Creature {
         //core.Travel(player);
     }
 
-    public void Save_Character_Feat(Player player) throws IOException {
-        try (FileWriter FileWriter = new FileWriter(player.name + core.player_feat_data); PrintWriter PrintWriter = new PrintWriter(FileWriter);) {
+    public void Save_Character_Feat(Player player) throws IOException{
+        try (FileWriter FileWriter = new FileWriter(core.log_root + "/saves/" + player.name + core.player_feat_data);  PrintWriter PrintWriter = new PrintWriter(FileWriter);){
 
             //dual wield weapons
-            if (prof_dual_wield == true) {
+            if (prof_dual_wield == true){
                 PrintWriter.println("true");
             }
 
-            if (prof_dual_wield == false) {
+            if (prof_dual_wield == false){
                 PrintWriter.println("false");
             }
 
-            if (prof_imp_dual_wield == true) {
+            if (prof_imp_dual_wield == true){
                 PrintWriter.println("true");
             }
 
-            if (prof_imp_dual_wield == false) {
+            if (prof_imp_dual_wield == false){
                 PrintWriter.println("false");
             }
 
-            if (prof_perfect_dual_wield == true) {
+            if (prof_perfect_dual_wield == true){
                 PrintWriter.println("true");
             }
 
-            if (prof_perfect_dual_wield == false) {
+            if (prof_perfect_dual_wield == false){
                 PrintWriter.println("false");
             }
 
             PrintWriter.println(dual_wield_feat);
 
             //critical hits
-            if (prof_crit == true) {
+            if (prof_crit == true){
                 PrintWriter.println("true");
             }
 
-            if (prof_crit == false) {
+            if (prof_crit == false){
                 PrintWriter.println("false");
             }
 
-            if (prof_imp_crit == true) {
+            if (prof_imp_crit == true){
                 PrintWriter.println("true");
             }
 
-            if (prof_imp_crit == false) {
+            if (prof_imp_crit == false){
                 PrintWriter.println("false");
             }
 
-            if (prof_perfect_crit == true) {
+            if (prof_perfect_crit == true){
                 PrintWriter.println("true");
             }
 
-            if (prof_perfect_crit == false) {
+            if (prof_perfect_crit == false){
                 PrintWriter.println("false");
             }
 
             PrintWriter.println(crit_dmg_feat);
 
             //hp
-            if (prof_hp == true) {
+            if (prof_hp == true){
                 PrintWriter.println("true");
             }
 
-            if (prof_hp == false) {
+            if (prof_hp == false){
                 PrintWriter.println("false");
             }
 
-            if (prof_imp_hp == true) {
+            if (prof_imp_hp == true){
                 PrintWriter.println("true");
             }
 
-            if (prof_imp_hp == false) {
+            if (prof_imp_hp == false){
                 PrintWriter.println("false");
             }
 
             PrintWriter.println(hp_feat);
 
-            if (prof_hp_first_grant == true) {
+            if (prof_hp_first_grant == true){
                 PrintWriter.println("true");
             }
 
-            if (prof_hp_first_grant == false) {
+            if (prof_hp_first_grant == false){
                 PrintWriter.println("false");
             }
 
             //mp
-            if (prof_mp == true) {
+            if (prof_mp == true){
                 PrintWriter.println("true");
             }
 
-            if (prof_mp == false) {
+            if (prof_mp == false){
                 PrintWriter.println("false");
             }
 
-            if (prof_imp_mp == true) {
+            if (prof_imp_mp == true){
                 PrintWriter.println("true");
             }
 
-            if (prof_imp_mp == false) {
+            if (prof_imp_mp == false){
                 PrintWriter.println("false");
             }
 
             PrintWriter.println(mp_feat);
 
-            if (prof_mp_first_grant == true) {
+            if (prof_mp_first_grant == true){
                 PrintWriter.println("true");
             }
 
-            if (prof_mp_first_grant == false) {
+            if (prof_mp_first_grant == false){
                 PrintWriter.println("false");
             }
 
@@ -548,8 +550,8 @@ public class Player extends Creature {
 
     }
 
-    public void Save_Character_Inventory(Player player) throws IOException {
-        try (FileWriter FileWriter = new FileWriter(player.name + core.player_inventory_data); PrintWriter PrintWriter = new PrintWriter(FileWriter);) {
+    public void Save_Character_Inventory(Player player) throws IOException{
+        try (FileWriter FileWriter = new FileWriter(core.log_root + "/saves/" + player.name + core.player_inventory_data);  PrintWriter PrintWriter = new PrintWriter(FileWriter);){
 
             PrintWriter.println(item.s_hp_pot);
             PrintWriter.println(item.m_hp_pot);
@@ -592,8 +594,8 @@ public class Player extends Creature {
 
     }
 
-    public void Save_Character_Quest(Player player) throws IOException {
-        try (FileWriter FileWriter = new FileWriter(player.name + core.player_quest_data); PrintWriter PrintWriter = new PrintWriter(FileWriter);) {
+    public void Save_Character_Quest(Player player) throws IOException{
+        try (FileWriter FileWriter = new FileWriter(core.log_root + "/saves/" + player.name + core.player_quest_data);  PrintWriter PrintWriter = new PrintWriter(FileWriter);){
 
             PrintWriter.println(encounters_completed);
             PrintWriter.println(alpha_kills);
@@ -608,8 +610,8 @@ public class Player extends Creature {
 
     }
 
-    public void Save_Character_Spells(Player player) throws IOException {
-        try (FileWriter FileWriter = new FileWriter(player.name + core.player_spell_data); PrintWriter PrintWriter = new PrintWriter(FileWriter);) {
+    public void Save_Character_Spells(Player player) throws IOException{
+        try (FileWriter FileWriter = new FileWriter(core.log_root + "/saves/" + player.name + core.player_spell_data);  PrintWriter PrintWriter = new PrintWriter(FileWriter);){
 
             PrintWriter.println(s_blizzard_rank);
             PrintWriter.println(s_cure_rank);
@@ -639,20 +641,23 @@ public class Player extends Creature {
     }
 
     /**
-     * Loads the stuff in the same order Save saves it.
-     *
-     * @param load_me
-     * @param player
-     * @throws java.io.FileNotFoundException
-     * @throws java.io.IOException
-     */
-    public void Load_Character(String load_me, Player player) throws FileNotFoundException, IOException {
+     Loads the stuff in the same order Save saves it.
 
+     @param load_me
+     @param player
+
+     @throws java.io.FileNotFoundException
+     @throws java.io.IOException
+     */
+    public void Load_Character(String load_me, Player player) throws FileNotFoundException, IOException{
 //have to set this flag before reading hp or it will not work
         Enemy = false;
 
+//calling this to get pathing of save data
+        core.Folder_Creation(load_me);
+        String load = core.save_root + load_me;
 //Read back the saved values from character
-        BufferedReader br = new BufferedReader(new FileReader(load_me + core.player_data));
+        BufferedReader br = new BufferedReader(new FileReader(load + core.player_data));
 
         String line = "";
         line = br.readLine();
@@ -724,16 +729,16 @@ public class Player extends Creature {
                 name + "s core data has now been loaded");
 
         //Load Feats
-        Load_Character_Feat(name, player);
+        Load_Character_Feat(load, player);
 
         //Load Inventory
-        Load_Character_Inventory(name, player);
+        Load_Character_Inventory(load, player);
 
         //Load Quest
-        Load_Character_Quest(name, player);
+        Load_Character_Quest(load, player);
 
         //Load Spells
-        Load_Character_Spells(name, player);
+        Load_Character_Spells(load, player);
 
         //Use the values read back to build the rest we need to which isnt saved
         player.set_lvl(player);
@@ -752,11 +757,11 @@ public class Player extends Creature {
                 name + "s mana has been fully restored");
 
         //setup weapon damage & defense
-        if (player.item.equipt_weapon2 > 0) {
+        if (player.item.equipt_weapon2 > 0){
             player.item.dual_wield_dmg_flag = true;
         }
 
-        if (player.item.equipt_weapon2 == 0) {
+        if (player.item.equipt_weapon2 == 0){
             player.item.dual_wield_dmg_flag = false;
         }
 
@@ -778,7 +783,7 @@ public class Player extends Creature {
         //core.Travel(player);
     }
 
-    public void Load_Character_Feat(String load_me, Player player) throws FileNotFoundException, IOException {
+    public void Load_Character_Feat(String load_me, Player player) throws FileNotFoundException, IOException{
         //Read back the saved values from character
         BufferedReader br = new BufferedReader(new FileReader(load_me + core.player_feat_data));
 
@@ -786,26 +791,26 @@ public class Player extends Creature {
 
         //dual wield
         line = br.readLine();
-        if ("true".equals(line)) {
+        if ("true".equals(line)){
             player.prof_dual_wield = true;
         }
-        if ("false".equals(line)) {
+        if ("false".equals(line)){
             player.prof_dual_wield = false;
         }
 
         line = br.readLine();
-        if ("true".equals(line)) {
+        if ("true".equals(line)){
             player.prof_imp_dual_wield = true;
         }
-        if ("false".equals(line)) {
+        if ("false".equals(line)){
             player.prof_imp_dual_wield = false;
         }
 
         line = br.readLine();
-        if ("true".equals(line)) {
+        if ("true".equals(line)){
             player.prof_perfect_dual_wield = true;
         }
-        if ("false".equals(line)) {
+        if ("false".equals(line)){
             player.prof_perfect_dual_wield = false;
         }
 
@@ -817,26 +822,26 @@ public class Player extends Creature {
 
         //crits
         line = br.readLine();
-        if ("true".equals(line)) {
+        if ("true".equals(line)){
             player.prof_crit = true;
         }
-        if ("false".equals(line)) {
+        if ("false".equals(line)){
             player.prof_crit = false;
         }
 
         line = br.readLine();
-        if ("true".equals(line)) {
+        if ("true".equals(line)){
             player.prof_imp_crit = true;
         }
-        if ("false".equals(line)) {
+        if ("false".equals(line)){
             player.prof_imp_crit = false;
         }
 
         line = br.readLine();
-        if ("true".equals(line)) {
+        if ("true".equals(line)){
             player.prof_perfect_crit = true;
         }
-        if ("false".equals(line)) {
+        if ("false".equals(line)){
             player.prof_perfect_crit = false;
         }
 
@@ -847,18 +852,18 @@ public class Player extends Creature {
                 name + "s Crit Dmg feat data has now been loaded");
         //hp
         line = br.readLine();
-        if ("true".equals(line)) {
+        if ("true".equals(line)){
             player.prof_hp = true;
         }
-        if ("false".equals(line)) {
+        if ("false".equals(line)){
             player.prof_hp = false;
         }
 
         line = br.readLine();
-        if ("true".equals(line)) {
+        if ("true".equals(line)){
             player.prof_imp_hp = true;
         }
-        if ("false".equals(line)) {
+        if ("false".equals(line)){
             player.prof_imp_hp = false;
         }
 
@@ -866,10 +871,10 @@ public class Player extends Creature {
         player.hp_feat = Integer.parseInt(line);
 
         line = br.readLine();
-        if ("true".equals(line)) {
+        if ("true".equals(line)){
             player.prof_hp_first_grant = true;
         }
-        if ("false".equals(line)) {
+        if ("false".equals(line)){
             player.prof_hp_first_grant = false;
         }
 
@@ -878,18 +883,18 @@ public class Player extends Creature {
 
         //mp
         line = br.readLine();
-        if ("true".equals(line)) {
+        if ("true".equals(line)){
             player.prof_mp = true;
         }
-        if ("false".equals(line)) {
+        if ("false".equals(line)){
             player.prof_mp = false;
         }
 
         line = br.readLine();
-        if ("true".equals(line)) {
+        if ("true".equals(line)){
             player.prof_imp_mp = true;
         }
-        if ("false".equals(line)) {
+        if ("false".equals(line)){
             player.prof_imp_mp = false;
         }
 
@@ -897,10 +902,10 @@ public class Player extends Creature {
         player.mp_feat = Integer.parseInt(line);
 
         line = br.readLine();
-        if ("true".equals(line)) {
+        if ("true".equals(line)){
             player.prof_mp_first_grant = true;
         }
-        if ("false".equals(line)) {
+        if ("false".equals(line)){
             player.prof_mp_first_grant = false;
         }
 
@@ -913,7 +918,7 @@ public class Player extends Creature {
                 name + "s feats have all been loaded now");
     }
 
-    public void Load_Character_Inventory(String load_me, Player player) throws FileNotFoundException, IOException {
+    public void Load_Character_Inventory(String load_me, Player player) throws FileNotFoundException, IOException{
         //Read back the saved values from character
         BufferedReader br = new BufferedReader(new FileReader(load_me + core.player_inventory_data));
 
@@ -1006,7 +1011,7 @@ public class Player extends Creature {
                 name + "s inventory data has now been loaded");
     }
 
-    public void Load_Character_Quest(String load_me, Player player) throws FileNotFoundException, IOException {
+    public void Load_Character_Quest(String load_me, Player player) throws FileNotFoundException, IOException{
 //Read back the saved values from character
         BufferedReader br = new BufferedReader(new FileReader(load_me + core.player_quest_data));
 
@@ -1027,7 +1032,7 @@ public class Player extends Creature {
                 player.name + "s quest data has now been loaded");
     }
 
-    public void Load_Character_Spells(String load_me, Player player) throws FileNotFoundException, IOException {
+    public void Load_Character_Spells(String load_me, Player player) throws FileNotFoundException, IOException{
 //Read back the saved values from character
         BufferedReader br = new BufferedReader(new FileReader(load_me + core.player_spell_data));
 
@@ -1074,8 +1079,8 @@ public class Player extends Creature {
                 player.name + "s Spell data has now been loaded");
     }
 
-    public void set_class_choice(String class_name) {
-        switch (class_name) {
+    public void set_class_choice(String class_name){
+        switch (class_name){
             case "fighter":
                 ftr_lvl++;
                 break;
@@ -1099,16 +1104,16 @@ public class Player extends Creature {
     }
 
     /**
-     * damage reduction modifier - con less then 10 is negative to your armor
-     * value. 10 is no change at all. 12 or higher is positive to your armor
-     * value. damage modifier.strength less then 10 is negative to your damage
-     * value. 10 is no change at all to the damage value. 12 or higher is
-     * positive to your damage value.
+     damage reduction modifier - con less then 10 is negative to your armor
+     value. 10 is no change at all. 12 or higher is positive to your armor
+     value. damage modifier.strength less then 10 is negative to your damage
+     value. 10 is no change at all to the damage value. 12 or higher is positive
+     to your damage value.
      */
-    int set_modifiers(String stat_name, int value) throws IOException {
+    int set_modifiers(String stat_name, int value) throws IOException{
         int mod;
 
-        switch (value) {
+        switch (value){
             default:
                 mod = 0;
                 break;
@@ -1160,4 +1165,5 @@ public class Player extends Creature {
         return mod;
 
     }
+
 }

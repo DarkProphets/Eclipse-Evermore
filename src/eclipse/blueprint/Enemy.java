@@ -4,22 +4,22 @@ package eclipse.blueprint;
 
 import java.util.Random;
 
-public class Enemy extends Creature {
+public class Enemy extends Creature{
 
     final int MONSTERS_CREATED = 7;
     Enemy_Spells e_spell = new Enemy_Spells();
 
     //for random encounters
-    Enemy(int level) {
+    Enemy(int level){
         Random random = new Random();
         Enemy = true;
         int enemy_to_spawn = random.nextInt(MONSTERS_CREATED);
 
-        while (enemy_to_spawn == 0 || enemy_to_spawn > MONSTERS_CREATED) {
+        while (enemy_to_spawn == 0 || enemy_to_spawn > MONSTERS_CREATED){
             random.nextInt(MONSTERS_CREATED);
         }
 
-        switch (enemy_to_spawn) {
+        switch (enemy_to_spawn){
             case 1:
                 Imp();
                 break;
@@ -46,11 +46,11 @@ public class Enemy extends Creature {
     }
 
     //for arena encounters
-    Enemy(int level, String monster) {
+    Enemy(int level, String monster){
         Enemy = true;
         int enemy_to_spawn = 0;
 
-        switch (monster) {
+        switch (monster){
             case "Imp":
                 enemy_to_spawn = 1;
                 break;
@@ -74,7 +74,7 @@ public class Enemy extends Creature {
                 break;
         }
         //Using the original original Alpha values for creatures the Arena
-        switch (enemy_to_spawn) {
+        switch (enemy_to_spawn){
             case 1:
                 Arena_Imp();
                 break;
@@ -100,8 +100,8 @@ public class Enemy extends Creature {
         scale_enemy(this, level);
     }
 
-    public void spawn_enemy(String s, int x) {
-        if (Enemy == true) {
+    public void spawn_enemy(String s, int x){
+        if (Enemy == true){
             name = s;
             set_xp(x);
             set_gp(get_xp() * 2);
@@ -111,9 +111,9 @@ public class Enemy extends Creature {
         }
     }
 
-    private void scale_enemy(Enemy e, int scale) {
+    private void scale_enemy(Enemy e, int scale){
         int i = 0;
-        for (i = 0; i < scale; i++) {
+        for (i = 0 ; i < scale ; i++){
             e.set_xp(e.get_xp() + e.get_xp());
             e.set_gp(e.get_gp() + e.get_gp());
             e.set_chp(e.get_chp() + e.get_chp());
@@ -122,56 +122,56 @@ public class Enemy extends Creature {
         }
     }
 
-    private void Imp() {
+    private void Imp(){
         spawn_enemy("Imp", 10);
     }
 
-    private void Bandit() {
+    private void Bandit(){
         spawn_enemy("Bandit", 14);
     }
 
-    private void DarkImp() {
+    private void DarkImp(){
         spawn_enemy("Dark Imp", 15);
     }
 
-    private void Goblin() {
+    private void Goblin(){
         spawn_enemy("Goblin", 12);
     }
 
-    private void Hobgoblin() {
+    private void Hobgoblin(){
         spawn_enemy("Hobgoblin", 16);
     }
 
     //the only change for wolf from arena to ranom encounter is hp so just using one constructor for it
-    private void Wolf(int x) {
+    private void Wolf(int x){
         //build Wolf manually with values from Alpha
         name = "Wolf";
         set_xp(95);
         set_gp(42);
-        if (x == 2) {
+        if (x == 2){
             set_chp(50);
         }//Arena mode
-        if (x == 1) {
+        if (x == 1){
             set_chp(20);
         }//random encounter mode
         mhp = get_chp();
         dmg = 16;
     }
 
-    private void WolfPup(int x) {
+    private void WolfPup(int x){
         //Wolf pup hp to be equal to 28 no other data from Alpha besides damage
         //arena mode
-        if (x == 2) {
-            spawn_enemy("Wolf Pup", 54);
+        if (x == 2){
+            spawn_enemy("Wolf Pup", 28);
             dmg = (get_chp() + 2) / 2; //formula used for this in alpha
         }
 
-        if (x == 1) {
+        if (x == 1){
             spawn_enemy("Wolf Pup", 54);
         }//random encounter mode
     }
 
-    private void Arena_Imp() {
+    private void Arena_Imp(){
         name = "Imp";
         set_xp(20);
         set_gp(15);
@@ -180,7 +180,7 @@ public class Enemy extends Creature {
         dmg = 5;
     }
 
-    private void Arena_Hobgoblin() {
+    private void Arena_Hobgoblin(){
         name = "Hobgoblin";
         set_xp(70);
         set_gp(28);
@@ -189,7 +189,7 @@ public class Enemy extends Creature {
         dmg = 12;
     }
 
-    private void Arena_Goblin() {
+    private void Arena_Goblin(){
         name = "Goblin";
         set_xp(30);
         set_gp(20);
@@ -198,7 +198,7 @@ public class Enemy extends Creature {
         dmg = 7;
     }
 
-    private void Arena_DarkImp() {
+    private void Arena_DarkImp(){
         name = "Dark Imp";
         set_xp(40);
         set_gp(23);
@@ -206,4 +206,5 @@ public class Enemy extends Creature {
         mhp = get_chp();
         dmg = 9;
     }
+
 }

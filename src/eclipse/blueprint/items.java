@@ -2,17 +2,15 @@
 //Kealdor created items.java on 10-28-2023 at 5:01:34 PM
 package eclipse.blueprint;
 
+import eclipse.core;
 import java.io.IOException;
 
-import eclipse.core;
-
-/*TODO: Setup platinium armor, plate armor, dragon shield, and mithril rod 
-* 6 Magi Rod b_Dmg + 5
-* 7 Oak Staff b_Dmg + 2
-* 8 Holy Staff b_Dmg + 4
-* 9 Hermit Staff b_Dmg + 6
+/*
+ TODO: Setup platinium armor, plate armor, dragon shield, and mithril rod 6 Magi
+ Rod b_Dmg + 5 7 Oak Staff b_Dmg + 2 8 Holy Staff b_Dmg + 4 9 Hermit Staff b_Dmg
+ + 6
  */
-public class items {
+public class items{
 
     public Item_Effects item_effect = new Item_Effects();
 
@@ -98,10 +96,10 @@ public class items {
     public int l_shield;
     public int t_shield;//tower shield
 
-    public void equip_armor() throws IOException {
+    public void equip_armor() throws IOException{
         String armor_name;
 
-        switch (equipt_armor) {
+        switch (equipt_armor){
             default:
                 armor_name = "none equipt";
                 armor_def = 0;
@@ -142,9 +140,9 @@ public class items {
                 + armor_name + " and gives " + armor_def + " armor class");
     }
 
-    public void equip_shield() throws IOException {
+    public void equip_shield() throws IOException{
         String shield_name;
-        switch (equipt_shield) {
+        switch (equipt_shield){
             default:
                 shield_name = "none equipt";
                 shield_def = 0;
@@ -180,11 +178,11 @@ public class items {
                 + shield_name + " and gives " + shield_def + " armor class");
     }
 
-    public void equip_weapon() throws IOException {
-        switch (equipt_weapon) {
+    public void equip_weapon() throws IOException{
+        switch (equipt_weapon){
             default:
                 weapon_name = "none";
-                weapon_damage_dice = "1d0";
+                weapon_damage_dice = "1d6";
                 break;
             case 1://dagger
                 weapon_name = "dagger";
@@ -211,10 +209,9 @@ public class items {
                 weapon_name = "iron rod";
                 break;
         }
-
-        set_weapon_dmg(1, weapon_name);
-        set_arena_weapon_dmg(1, weapon_name);
-
+        int x = 1;
+        //set_weapon_dmg(x, weapon_name);
+        //set_arena_weapon_dmg(x, weapon_name);
         core.log("weapon info slot 1",
                 System.lineSeparator()
                 + "the equipt weapon in slot 1 is " + weapon_name
@@ -226,10 +223,10 @@ public class items {
                 + weapon_name + " does " + w1_f_dmg_dice + "Fire damage in both modes of encounters");
 
 //dual wield damage section   
-        if (dual_wield_dmg_flag == true && equipt_shield == 0) {
+        if (dual_wield_dmg_flag == true && equipt_shield == 0){
             core.log("weapon info - feat check", "dual wield is taken");
 
-            switch (equipt_weapon2) {
+            switch (equipt_weapon2){
                 default:
                     weapon_name2 = "none equipt";
                     weapon_damage_dice2 = "1d0";
@@ -250,9 +247,9 @@ public class items {
                     weapon_name2 = "iron rod";
                     break;
             }
-
-            set_weapon_dmg(2, weapon_name2);
-            set_arena_weapon_dmg(2, weapon_name2);
+            x = 2;
+            //set_weapon_dmg(x, weapon_name2);
+            //set_arena_weapon_dmg(x, weapon_name2);
 
             core.log("weapon info slot 2",
                     System.lineSeparator()
@@ -266,10 +263,10 @@ public class items {
         }
     }
 
-    public void set_weapon_dmg(int weapon_slot, String weapon) {
+    public void set_weapon_dmg(int weapon_slot, String weapon){
         String amt = null;
 
-        switch (weapon) {
+        switch (weapon){
             case "dagger":
                 amt = "1d4";
                 break;
@@ -296,31 +293,31 @@ public class items {
                 break;
         }
         //2h weapons use slot 1
-        if (weapon_slot == 1) {
+        if (weapon_slot == 1){
             weapon_damage_dice = amt;
             set_elemental_dmg(1, weapon);
         }
 
-        if (weapon_slot == 2) {
+        if (weapon_slot == 2){
             weapon_damage_dice2 = amt;
             set_elemental_dmg(2, weapon);
         }
     }
 
-    public void weapon_dmg_calc(int weapon_slot, int amt) {
+    public void weapon_dmg_calc(int weapon_slot, int amt){
         //2h weapons use slot 1
-        if (weapon_slot == 1) {
+        if (weapon_slot == 1){
             weapon_dmg = amt;
         }
-        if (weapon_slot == 2) {
+        if (weapon_slot == 2){
             weapon2_dmg = amt;
         }
     }
 
-    public void set_arena_weapon_dmg(int weapon_slot, String weapon) throws IOException {
+    public void set_arena_weapon_dmg(int weapon_slot, String weapon) throws IOException{
         int amt;
 
-        switch (weapon) {
+        switch (weapon){
             case "dagger":
                 amt = 2;
                 break;
@@ -356,17 +353,17 @@ public class items {
         }
 
         //2h weapons use slot 1
-        if (weapon_slot == 1) {
+        if (weapon_slot == 1){
             a_weapon_dmg = amt;
         }
-        if (weapon_slot == 2) {
+        if (weapon_slot == 2){
             a_weapon2_dmg = amt;
         }
     }
 
-    public void set_elemental_dmg(int weapon_slot, String weapon) {
-        if (weapon_slot == 1) {
-            switch (weapon) {
+    public void set_elemental_dmg(int weapon_slot, String weapon){
+        if (weapon_slot == 1){
+            switch (weapon){
                 case "dagger":
                     w1_f_dmg_dice = dagger_f_dmg;
                     break;
@@ -396,8 +393,8 @@ public class items {
                     break;
             }
         }
-        if (weapon_slot == 2) {
-            switch (weapon) {
+        if (weapon_slot == 2){
+            switch (weapon){
                 case "dagger":
                     w2_f_dmg_dice = dagger_f_dmg;
                     break;

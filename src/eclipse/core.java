@@ -84,9 +84,4 @@ public class core {
         }
     }
 
-//    public void Change_Screen(JFrame frame, JPanel o_screen, JPanel n_screen) {
-//        frame.remove(o_screen);
-//        frame.add(n_screen);
-//        //frame.pack();
-//    }
 }

@@ -673,7 +673,7 @@ public class Player extends Creature{
 
 //calling this to get pathing of save data
         core.Folder_Creation(load_me);
-        String load = core.game_root + "/saves/" + load_me;
+        String load = core.game_root + "/saves/" + load_me + "/" + load_me;
 //Read back the saved values from character
         BufferedReader br = new BufferedReader(new FileReader(load + core.player_data));
 
@@ -803,7 +803,8 @@ public class Player extends Creature{
 
     public void Load_Character_Feat(String load_me, Player player) throws FileNotFoundException, IOException{
         //Read back the saved values from character
-        BufferedReader br = new BufferedReader(new FileReader(load_me + core.player_feat_data));
+        String load = core.game_root + "/saves/" + load_me + "/" + load_me;
+        BufferedReader br = new BufferedReader(new FileReader(load + core.player_feat_data));
 
         String line = "";
 
@@ -938,7 +939,8 @@ public class Player extends Creature{
 
     public void Load_Character_Inventory(String load_me, Player player) throws FileNotFoundException, IOException{
         //Read back the saved values from character
-        BufferedReader br = new BufferedReader(new FileReader(load_me + core.player_inventory_data));
+        String load = core.game_root + "/saves/" + load_me + "/" + load_me;
+        BufferedReader br = new BufferedReader(new FileReader(load + core.player_inventory_data));
 
         String line = "";
 
@@ -1031,7 +1033,8 @@ public class Player extends Creature{
 
     public void Load_Character_Quest(String load_me, Player player) throws FileNotFoundException, IOException{
 //Read back the saved values from character
-        BufferedReader br = new BufferedReader(new FileReader(load_me + core.player_quest_data));
+        String load = core.game_root + "/saves/" + load_me + "/" + load_me;
+        BufferedReader br = new BufferedReader(new FileReader(load + core.player_quest_data));
 
         String line = "";
 
@@ -1052,7 +1055,8 @@ public class Player extends Creature{
 
     public void Load_Character_Spells(String load_me, Player player) throws FileNotFoundException, IOException{
 //Read back the saved values from character
-        BufferedReader br = new BufferedReader(new FileReader(load_me + core.player_spell_data));
+        String load = core.game_root + "/saves/" + load_me + "/" + load_me;
+        BufferedReader br = new BufferedReader(new FileReader(load + core.player_spell_data));
 
         String line = "";
 

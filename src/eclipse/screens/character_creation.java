@@ -341,7 +341,7 @@ public class character_creation extends javax.swing.JPanel{
         jTextArea1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jTextArea1.setForeground(new java.awt.Color(0, 0, 255));
         jTextArea1.setRows(5);
-        jTextArea1.setText("Enter name\nSelect race \nSpend points\nClick \"Points\" word \nSelect class\n-----------------------------------------------------------\nHuman       8 Str        8 Vit          8 Wis              8 Iq\nElf               8 Str        6 Vit          6 Wis            12 Iq\nDwarf         10 Str     10 Vit         4 Wis              8 Iq\nHalforc       12 Str      8 Vit         6 Wis              6 Iq\nHalfelf        6 Str        6 Vit        10 Wis           10 Iq\n-----------------------------------------------------------\nFighter                            11 Str\nBlack Mage                    11 Iq\nWhite Mage                   11 Wis\nRed Mage                       13 Iq 13 Wis\nDark Knight                   13 Str 13 Iq\nPaladin                           13 Str 13 Wis\n\n-----------------------------------------------------------\nMore races + classes to come in future updates\nJoin our Discord (click this to open link)\n~Kealdor");
+        jTextArea1.setText("Enter name\nSelect race \nSpend points\nSelect class\nClick Complete\n-----------------------------------------------------------\nHuman       8 Str        8 Vit          8 Wis              8 Iq\nElf               8 Str        6 Vit          6 Wis            12 Iq\nDwarf         10 Str     10 Vit         4 Wis              8 Iq\nHalforc       12 Str      8 Vit         6 Wis              6 Iq\nHalfelf        6 Str        6 Vit        10 Wis           10 Iq\n-----------------------------------------------------------\nFighter                            11 Str\nBlack Mage                    11 Iq\nWhite Mage                   11 Wis\nRed Mage                       13 Iq 13 Wis\nDark Knight                   13 Str 13 Iq\nPaladin                           13 Str 13 Wis\n\n-----------------------------------------------------------\nMore races + classes to come in future updates\nJoin our Discord (click this to open link)\n~Kealdor");
         jTextArea1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextArea1MouseClicked(evt);
@@ -590,7 +590,7 @@ public class character_creation extends javax.swing.JPanel{
         }
 
         if (points == 0 && name_entry.getText() != null){
-            done_btn.setEnabled(true);
+            class_select.setEnabled(true);
         }
     }//GEN-LAST:event_points_valPropertyChange
 
@@ -1037,27 +1037,21 @@ public class character_creation extends javax.swing.JPanel{
         switch (class_number){
             case 0:
                 p_class = "Fighter";
-                //output.setText(p_class + " : 11 Strength");
                 break;
             case 1:
                 p_class = "Black Mage";
-                //output.setText(p_class + " : 11 IQ");
                 break;
             case 2:
                 p_class = "White Mage";
-                //output.setText(p_class + " : 11 Wisdom");
                 break;
             case 3:
                 p_class = "Red Mage";
-                //output.setText(p_class + " : 13 IQ + 13 Wisdom");
                 break;
             case 4:
                 p_class = "Dark Knight";
-                //output.setText(p_class + " : 13 Strength + 13 IQ");
                 break;
             case 5:
                 p_class = "Paladin";
-                //output.setText(p_class + " : 13 Strength + 13 Wisdom");
                 break;
         }
 
@@ -1070,10 +1064,6 @@ public class character_creation extends javax.swing.JPanel{
             race_select.setEnabled(true);
         }
     }//GEN-LAST:event_name_entryKeyReleased
-
-    private void race_selectMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_race_selectMouseReleased
-
-    }//GEN-LAST:event_race_selectMouseReleased
 
     private void race_selectMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_race_selectMouseEntered
         race_select.setEnabled(true);
@@ -1257,7 +1247,7 @@ public class character_creation extends javax.swing.JPanel{
     }//GEN-LAST:event_race_selectActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        class_select.setEnabled(true);
+
     }//GEN-LAST:event_jLabel2MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

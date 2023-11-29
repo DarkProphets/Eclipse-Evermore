@@ -4,25 +4,25 @@ package eclipse.screens;
 
 import eclipse.Player_Party;
 import eclipse.core;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.io.IOException;
 import javax.swing.JFrame;
-import java.awt.Color;
-import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import java.awt.BorderLayout;
-import java.io.IOException;
 
-public class Game_Screen extends JFrame {
+public class Game_Screen extends JFrame{
 
     static JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
     static int tab = Game_Screen.tabbedPane.getTabCount();
     static JPanel title_screen;
     static Player_Party party = null;
 
-    Game_Screen() throws IOException {
+    Game_Screen() throws IOException{
         getContentPane().setEnabled(false);
         setMinimumSize(new Dimension(800, 600));
         getContentPane().setBackground(Color.BLACK);
@@ -46,23 +46,20 @@ public class Game_Screen extends JFrame {
 
     }
 
-    //public void Change_Screen(JPanel o_screen, JPanel n_screen){
-    //this.remove(o_screen);
-    //this.add(n_screen);
-//}
     /**
-     * Launch the application.
+     Launch the application.
      */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
+    public static void main(String[] args){
+        EventQueue.invokeLater(new Runnable(){
+            public void run(){
+                try{
                     Game_Screen frame = new Game_Screen();
                     frame.setVisible(true);
-                } catch (Exception e) {
+                } catch (Exception e){
                     e.printStackTrace();
                 }
             }
         });
     }
+
 }

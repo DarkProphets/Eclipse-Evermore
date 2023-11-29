@@ -101,7 +101,7 @@ public class items{
 
         switch (equipt_armor){
             default:
-                armor_name = "none equipt";
+                armor_name = "none";
                 armor_def = 0;
                 break;
 
@@ -144,7 +144,7 @@ public class items{
         String shield_name;
         switch (equipt_shield){
             default:
-                shield_name = "none equipt";
+                shield_name = "none";
                 shield_def = 0;
                 break;
 
@@ -181,7 +181,7 @@ public class items{
     public void equip_weapon() throws IOException{
         switch (equipt_weapon){
             default:
-                weapon_name = "none";
+                weapon_name = "unarmed";
                 weapon_damage_dice = "1d6";
                 break;
             case 1://dagger
@@ -210,13 +210,13 @@ public class items{
                 break;
         }
         int x = 1;
-        //set_weapon_dmg(x, weapon_name);
-        //set_arena_weapon_dmg(x, weapon_name);
+        set_weapon_dmg(x, weapon_name);
+        set_arena_weapon_dmg(x, weapon_name);
         core.log("weapon info slot 1",
                 System.lineSeparator()
                 + "the equipt weapon in slot 1 is " + weapon_name
                 + System.lineSeparator()
-                + weapon_name + " does " + weapon_damage_dice + " for weapon_dmg in random encounters"
+                + weapon_name + " does " + weapon_damage_dice + " for weapon dmg in random encounters"
                 + System.lineSeparator()
                 + weapon_name + " does " + a_weapon_dmg + " in arena encounters"
                 + System.lineSeparator()
@@ -228,7 +228,7 @@ public class items{
 
             switch (equipt_weapon2){
                 default:
-                    weapon_name2 = "none equipt";
+                    weapon_name2 = "unarmed";
                     weapon_damage_dice2 = "1d0";
                     break;
                 case 1://dagger
@@ -248,8 +248,8 @@ public class items{
                     break;
             }
             x = 2;
-            //set_weapon_dmg(x, weapon_name2);
-            //set_arena_weapon_dmg(x, weapon_name2);
+            set_weapon_dmg(x, weapon_name2);
+            set_arena_weapon_dmg(x, weapon_name2);
 
             core.log("weapon info slot 2",
                     System.lineSeparator()
@@ -267,6 +267,9 @@ public class items{
         String amt = null;
 
         switch (weapon){
+            case "unarmed":
+                amt = "1d6";
+                break;
             case "dagger":
                 amt = "1d4";
                 break;
@@ -318,6 +321,10 @@ public class items{
         int amt;
 
         switch (weapon){
+            case "unarmed":
+                amt = 6;
+                break;
+
             case "dagger":
                 amt = 2;
                 break;
@@ -392,7 +399,12 @@ public class items{
                     w1_f_dmg_dice = unarmed_gauntlet_f_dmg;
                     break;
             }
+            if (w1_f_dmg_dice == null){
+                w1_f_dmg_dice = "0";
+            }
+
         }
+
         if (weapon_slot == 2){
             switch (weapon){
                 case "dagger":
@@ -422,6 +434,9 @@ public class items{
                 default:
                     w2_f_dmg_dice = unarmed_gauntlet_f_dmg;
                     break;
+            }
+            if (w2_f_dmg_dice == null){
+                w2_f_dmg_dice = "0";
             }
         }
     }

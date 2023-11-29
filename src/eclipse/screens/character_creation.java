@@ -687,7 +687,7 @@ public class character_creation extends javax.swing.JPanel{
                     Game_Screen.tabbedPane.removeTabAt(0);
                     Game_Screen.tabbedPane.removeTabAt(0);
                     Game_Screen.tabbedPane.insertTab("Antioch", null, antioch_screen, null, 0);
-                    Game_Screen.tabbedPane.setSelectedIndex(1);
+                    Game_Screen.tabbedPane.setSelectedIndex(0);
                 }
                 if (Game_Screen.tab > 1){
 

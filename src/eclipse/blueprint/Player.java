@@ -150,19 +150,37 @@ public class Player extends Creature{
     //public int lb_double;//doubles every stat in combat for 2 turns
     public Player() throws IOException{
         core.log("Dice roll - level up hit points",
-                "about to roll for Mage Level Up MP");
+                "about to roll for Mage Level Up MP during player object creation");
 
         mage_lvl_up_mp = core.Dice_Parser("1d10");
 
+        if (mage_lvl_up_mp == 0 && new_character == true){
+            while (mage_lvl_up_mp == 0){
+                mage_lvl_up_mp = core.Dice_Parser("1d10");
+            }
+        }
+
         core.log("Dice roll - level up hit points",
-                "about to roll for Mage Level Up HP");
+                "about to roll for Mage Level Up HP during player object creation");
 
         mage_lvl_up_hp = core.Dice_Parser("1d4");
 
+        if (mage_lvl_up_hp == 0 && new_character == true){
+            while (mage_lvl_up_hp == 0){
+                mage_lvl_up_mp = core.Dice_Parser("1d4");
+            }
+        }
+
         core.log("Dice roll - level up hit points",
-                "about to roll for Fighter Level Up HP");
+                "about to roll for Fighter Level Up HP during player object creation");
 
         ftr_lvl_up_hp = core.Dice_Parser("1d8");
+
+        if (ftr_lvl_up_hp == 0 && new_character == true){
+            while (ftr_lvl_up_hp == 0){
+                ftr_lvl_up_hp = core.Dice_Parser("1d8");
+            }
+        }
 
     }
 
@@ -389,8 +407,8 @@ public class Player extends Creature{
      @throws java.io.IOException
      */
     public void Save_Character(Player player) throws IOException{
-        core.Folder_Creation(player.name, "save");
-        try (FileWriter FileWriter = new FileWriter(core.save_root + player.name + core.player_data);  PrintWriter PrintWriter = new PrintWriter(FileWriter);){
+        core.Folder_Creation(3, player.name);
+        try (FileWriter FileWriter = new FileWriter(core.game_root + "/saves/vault/" + player.name + "/" + player.name + core.player_data);  PrintWriter PrintWriter = new PrintWriter(FileWriter);){
 
             PrintWriter.println(name);
             PrintWriter.println(race);
@@ -431,7 +449,7 @@ public class Player extends Creature{
     }
 
     public void Save_Character_Feat(Player player) throws IOException{
-        try (FileWriter FileWriter = new FileWriter(core.log_root + "/saves/" + player.name + core.player_feat_data);  PrintWriter PrintWriter = new PrintWriter(FileWriter);){
+        try (FileWriter FileWriter = new FileWriter(core.game_root + "/saves/vault/" + player.name + "/" + player.name + core.player_feat_data);  PrintWriter PrintWriter = new PrintWriter(FileWriter);){
 
             //dual wield weapons
             if (prof_dual_wield == true){
@@ -551,7 +569,7 @@ public class Player extends Creature{
     }
 
     public void Save_Character_Inventory(Player player) throws IOException{
-        try (FileWriter FileWriter = new FileWriter(core.log_root + "/saves/" + player.name + core.player_inventory_data);  PrintWriter PrintWriter = new PrintWriter(FileWriter);){
+        try (FileWriter FileWriter = new FileWriter(core.game_root + "/saves/vault/" + player.name + "/" + player.name + core.player_inventory_data);  PrintWriter PrintWriter = new PrintWriter(FileWriter);){
 
             PrintWriter.println(item.s_hp_pot);
             PrintWriter.println(item.m_hp_pot);
@@ -595,7 +613,7 @@ public class Player extends Creature{
     }
 
     public void Save_Character_Quest(Player player) throws IOException{
-        try (FileWriter FileWriter = new FileWriter(core.log_root + "/saves/" + player.name + core.player_quest_data);  PrintWriter PrintWriter = new PrintWriter(FileWriter);){
+        try (FileWriter FileWriter = new FileWriter(core.game_root + "/saves/vault/" + player.name + "/" + player.name + core.player_quest_data);  PrintWriter PrintWriter = new PrintWriter(FileWriter);){
 
             PrintWriter.println(encounters_completed);
             PrintWriter.println(alpha_kills);
@@ -611,7 +629,7 @@ public class Player extends Creature{
     }
 
     public void Save_Character_Spells(Player player) throws IOException{
-        try (FileWriter FileWriter = new FileWriter(core.log_root + "/saves/" + player.name + core.player_spell_data);  PrintWriter PrintWriter = new PrintWriter(FileWriter);){
+        try (FileWriter FileWriter = new FileWriter(core.game_root + "/saves/vault/" + player.name + "/" + player.name + core.player_spell_data);  PrintWriter PrintWriter = new PrintWriter(FileWriter);){
 
             PrintWriter.println(s_blizzard_rank);
             PrintWriter.println(s_cure_rank);
@@ -655,7 +673,7 @@ public class Player extends Creature{
 
 //calling this to get pathing of save data
         core.Folder_Creation(load_me);
-        String load = core.save_root + load_me;
+        String load = core.game_root + "/saves/" + load_me;
 //Read back the saved values from character
         BufferedReader br = new BufferedReader(new FileReader(load + core.player_data));
 

@@ -10,21 +10,20 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Random;
 
-public class core {
+public class core{
 
     public static int pre_alpha_fight = 0;
     public static String game_root = null;
-    public static String log_root = null;
     public final static String player_data = ".cha";
     public final static String player_feat_data = ".fea";
     public final static String player_inventory_data = ".inv";
     public final static String player_quest_data = ".qst";
     public final static String player_spell_data = ".spl";
     //public final static String player_bank_data = ".bnk";
-    //public final static String shared_banked_data = "common.bnk";
-    //public final static String shared_party_inventory_data = "common.inv";
+    //public final static String shared_banked_data = "sb_gp.bnk";
+    //public final static String shared_party_inventory_data = "sb_inv.inv";
 
-    public static int Dice_Parser(String s) throws IOException {
+    public static int Dice_Parser(String s) throws IOException{
         Random random = new Random();
         int result = 0;
 
@@ -32,12 +31,12 @@ public class core {
         int dice_sides = Integer.parseInt((s.substring((s.indexOf("d") + 1), s.length())));
 
         log("dice roll - dice count", "About to roll " + dice_count + "d" + dice_sides);
-        for (int i = 0; i < dice_count; i++) {
+        for (int i = 0 ; i < dice_count ; i++){
             int random_number = random.nextInt(dice_sides);
             log("dice roll - result", "Rolled a " + random_number);
             result = result + random_number;
 
-            if (i == dice_count) {
+            if (i == dice_count){
                 i = dice_count + 1;
                 log("dice roll - final result", result + " as a result of " + s + " being rolled");
             }
@@ -46,29 +45,52 @@ public class core {
         return result;
     }
 
-    public static void Folder_Creation(String folder_name) throws IOException {
+    public static void Folder_Creation(String folder_name) throws IOException{
         String home = System.getProperty("user.home");
-        game_root = home + "./Evermore";
+        game_root = home + "./Documents/Evermore";
         File folder = new File(game_root + "/" + folder_name);
-        log_root = folder.getCanonicalPath();
-        if (!folder.exists()) {
+        //log_root = folder.getCanonicalPath();
+        if (!folder.exists()){
             folder.mkdirs();
         }
     }
 
-    public static void log(String function, String data) throws IOException {
+    public static void Folder_Creation(int function, String folder_name) throws IOException{
+        String home = System.getProperty("user.home");
+        game_root = home + "./Documents/Evermore";
+        File folder = null;
+        switch (function){
+            case 1://log folder
+                folder = new File(game_root + "/" + folder_name);
+                break;
+            case 2://overide folder
+                folder = new File(game_root + "/" + folder_name);
+                break;
+            case 3://character
+                folder = new File(game_root + "/saves/vault/" + folder_name);
+                break;
+            case 4://common shared stuff
+                folder = new File(game_root + "/saves/party/" + folder_name);
+                break;
+        }
+        //log_root = folder.getCanonicalPath();
+        if (!folder.exists()){
+            folder.mkdirs();
+        }
+    }
+
+    public static void log(String function, String data) throws IOException{
         Timestamp time = new Timestamp(System.currentTimeMillis());
         Date date = new Date(time.getTime());
         String Date = date.toString();
 
-        Folder_Creation("logs");
+        Folder_Creation(1, "logs");
         //year needed this way because per function description of date.getYear() it subtracts 1900 from current year
         int year = date.getYear() + 1900;
-        //File file = new File("./log" + "/debug_" + date.getMonth() + "_" + date.getDate() + "_" + year + ".log");
-        File file = new File(log_root + "/debug_" + date.getMonth() + "_" + date.getDate() + "_" + year + ".log");
+        File file = new File(game_root + "./logs" + "/debug_" + date.getMonth() + "_" + date.getDate() + "_" + year + ".log");
         file.createNewFile();
 
-        try (FileWriter FileWriter = new FileWriter(file, true); PrintWriter PrintWriter = new PrintWriter(FileWriter)) {
+        try (FileWriter FileWriter = new FileWriter(file, true);  PrintWriter PrintWriter = new PrintWriter(FileWriter)){
 
             PrintWriter.println(Date.substring(0, 11)
                     + Date.substring(Date.length() - 4, Date.length()) + " "

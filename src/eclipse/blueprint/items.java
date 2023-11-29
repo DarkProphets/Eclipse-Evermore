@@ -218,9 +218,9 @@ public class items{
                 + System.lineSeparator()
                 + weapon_name + " does " + weapon_damage_dice + " for weapon_dmg in random encounters"
                 + System.lineSeparator()
-                + weapon_name + " does " + a_weapon_dmg + "in arena encounters"
+                + weapon_name + " does " + a_weapon_dmg + " in arena encounters"
                 + System.lineSeparator()
-                + weapon_name + " does " + w1_f_dmg_dice + "Fire damage in both modes of encounters");
+                + weapon_name + " does " + w1_f_dmg_dice + " Fire damage in both modes of encounters");
 
 //dual wield damage section   
         if (dual_wield_dmg_flag == true && equipt_shield == 0){
@@ -257,9 +257,9 @@ public class items{
                     + System.lineSeparator()
                     + weapon_name2 + " does " + weapon_damage_dice2 + " for weapon_dmg in random encounters"
                     + System.lineSeparator()
-                    + weapon_name2 + " does " + a_weapon2_dmg + "in arena fights"
+                    + weapon_name2 + " does " + a_weapon2_dmg + " in arena fights"
                     + System.lineSeparator()
-                    + weapon_name2 + " does " + w2_f_dmg_dice + "Fire damage in both modes of encounters");
+                    + weapon_name2 + " does " + w2_f_dmg_dice + " Fire damage in both modes of encounters");
         }
     }
 

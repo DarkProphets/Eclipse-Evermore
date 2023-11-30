@@ -6,6 +6,7 @@ package eclipse.screens;
 
 import eclipse.Player_Party;
 import eclipse.core;
+import static eclipse.core.game_root;
 import static eclipse.screens.Game_Screen.tabbedPane;
 import java.io.File;
 import java.io.IOException;
@@ -17,11 +18,20 @@ import javax.swing.JPanel;
  */
 public class load_game_screen extends javax.swing.JPanel{
 
+    int load_mode = 0;
+    File char_folder = null;
+    File party_folder = null;
+
     /**
      Creates new form load_game_screen
      */
     public load_game_screen() throws IOException{
         initComponents();
+
+        String home = System.getProperty("user.home");
+        game_root = home + "./Documents/Evermore";
+        char_folder = new File(game_root + "/" + "saves" + "/" + "vault");
+        party_folder = new File(game_root + "/" + "saves" + "/" + "party");
         core.log("load screen", "load screen rendered");
     }
 
@@ -38,6 +48,8 @@ public class load_game_screen extends javax.swing.JPanel{
         jFileChooser1 = new javax.swing.JFileChooser();
         load = new javax.swing.JButton();
         main_menu = new javax.swing.JButton();
+        party = new javax.swing.JButton();
+        jToggleButton2 = new javax.swing.JToggleButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
@@ -70,6 +82,7 @@ public class load_game_screen extends javax.swing.JPanel{
         );
 
         load.setText("Load Character");
+        load.setEnabled(false);
         load.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loadActionPerformed(evt);
@@ -83,16 +96,35 @@ public class load_game_screen extends javax.swing.JPanel{
             }
         });
 
+        party.setText("Load Party");
+        party.setEnabled(false);
+        party.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                partyActionPerformed(evt);
+            }
+        });
+
+        jToggleButton2.setText("Load Mode Toggle");
+        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(227, 227, 227)
+                .addGap(33, 33, 33)
+                .addComponent(jToggleButton2)
+                .addGap(103, 103, 103)
                 .addComponent(load)
-                .addGap(197, 197, 197)
+                .addGap(118, 118, 118)
+                .addComponent(party)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
                 .addComponent(main_menu)
-                .addContainerGap(217, Short.MAX_VALUE))
+                .addGap(33, 33, 33))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 21, Short.MAX_VALUE)
@@ -105,7 +137,9 @@ public class load_game_screen extends javax.swing.JPanel{
                 .addContainerGap(651, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(load)
-                    .addComponent(main_menu))
+                    .addComponent(main_menu)
+                    .addComponent(party)
+                    .addComponent(jToggleButton2))
                 .addGap(14, 14, 14))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -182,11 +216,44 @@ public class load_game_screen extends javax.swing.JPanel{
         }
     }//GEN-LAST:event_main_menuActionPerformed
 
+    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+
+        if (party.isEnabled()){
+            load_mode = 1;
+        } else if (load.isEnabled()){
+            load_mode = 2;
+        }
+        switch (load_mode){
+            case 1://character mode
+                party.setEnabled(false);
+                load.setEnabled(true);
+                jFileChooser1.setCurrentDirectory(char_folder);
+                break;
+            case 2://party mode
+                load.setEnabled(false);
+                party.setEnabled(true);
+                jFileChooser1.setCurrentDirectory(party_folder);
+                break;
+        }
+    }//GEN-LAST:event_jToggleButton2ActionPerformed
+
+    private void partyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_partyActionPerformed
+        File directory = new File(".");
+        File[] files = directory.listFiles();
+        for (File file : files){
+            if (file.getName().endsWith(".cha")){
+                //todo
+            }
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_partyActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JButton load;
     private javax.swing.JButton main_menu;
+    private javax.swing.JButton party;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -22,11 +22,15 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="227" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <Component id="jToggleButton2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
               <Component id="load" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="197" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
+              <Component id="party" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="139" max="32767" attributes="0"/>
               <Component id="main_menu" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="217" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
@@ -44,6 +48,8 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="load" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="main_menu" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="party" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jToggleButton2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
           </Group>
@@ -109,6 +115,7 @@
     <Component class="javax.swing.JButton" name="load">
       <Properties>
         <Property name="text" type="java.lang.String" value="Load Character"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="loadActionPerformed"/>
@@ -120,6 +127,23 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="main_menuActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="party">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Load Party"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="partyActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JToggleButton" name="jToggleButton2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Load Mode Toggle"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton2ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
